@@ -1,0 +1,26 @@
+{
+  "name": "define-this",
+  "version": "1.0.0",
+  "description": "Get the definition of words on the command line.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "define-this": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eronmmer/define-this.git"
+  },
+  "author": "Erons",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Eronmmer/define-this/issues"
+  },
+  "homepage": "https://github.com/Eronmmer/define-this#readme",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "yargs": "^15.3.1"
+  }
+}
