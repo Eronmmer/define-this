@@ -17,9 +17,16 @@ npx define-this
 ### Display the definition of a word
 
 ```bash
-# Displays the definition of a random word
-define-this define -w <english-word>
+# Displays the definition of bloody
+define-this define -w bloody
+
+# For phrases, use quotes
+define-this define -w "mad oh"
 ```
+
+![](https://res.cloudinary.com/djksghat4/image/upload/v1585589511/define-this/1.png)
+
+![](https://res.cloudinary.com/djksghat4/image/upload/v1585589511/define-this/madoh.png)
 
 ### Display synonyms of a word
 
@@ -28,8 +35,12 @@ define-this define -w <english-word>
 define-this synonym -w phenomenon
 
 # Displays three synonyms of phenomenon
-define-this synonym phenomenon -n 3
+define-this synonym -w phenomenon -n 3
 ```
+
+![](https://res.cloudinary.com/djksghat4/image/upload/v1585589511/define-this/2.png)
+
+![](https://res.cloudinary.com/djksghat4/image/upload/v1585589511/define-this/3.png)
 
 ## Todo
 
