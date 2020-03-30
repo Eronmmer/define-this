@@ -19,7 +19,9 @@ const getSynonym = async (word, number) => {
 			const res = await axios.get(`${datamuseSynonymUrl}${word}`);
 			if (res.data.length !== 0) {
 				if (number) {
-					const words = res.data.map((word) => word.word).slice(0, number);
+					const words = res.data
+						.map((word) => word.word)
+						.slice(0, Math.abs(number));
 					let synonyms = "";
 					words.forEach((word) => (synonyms += `\n❯ ${word}`));
 					return `${green(
