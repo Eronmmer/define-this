@@ -1,6 +1,6 @@
 # define-this
 
-Get the definition of words on the command line along with options to show synonyms, examples and translations. 
+Get the definition and synonyms of words on the command line. ⚡
 
 ## Install
 
@@ -14,45 +14,33 @@ npx define-this
 
 ## Usage
 
-### Display definition of a random word
+### Display the definition of a word
 
 ```bash
-# Displays the defintion of a random word
-define-this
-``
-
-### Define a word
-
-```bash
-# Display the definition of a word
-define-this phenomenon
+# Displays the definition of a random word
+define-this define -w <english-word>
 ```
 
 ### Display synonyms of a word
 
-Minimum of one and maximum of five.
-
 ```bash
 # Displays a synonym of phenomenon
-define-this phenomenon synonym
+define-this synonym -w phenomenon
 
-# Displays four synonyms of phenomenon
-define-this phenomenon synonym --four
-
-# Displays five synonyms of phenomenon
-define-this phenomenon synonym --five
+# Displays three synonyms of phenomenon
+define-this synonym phenomenon -n 3
 ```
 
-### Display translation of a word
+## Todo
 
-```bash
-# Displays the french translation of phenomenon
-define-this phenomenon translate --french
-```
+- Make commands and argument follow each other in a simpler and easier to understand way
 
-### Display example usage of a word
+- Add interactive spinner/loader-like texts while users await results
 
-```bash
-# Displays an example of the usage of phenomenon
-define-this phenomenon example
-```
+- Display translation of words from one language to another
+
+## APIS used
+
+- [An unofficial Urban Dictionary API](https://rapidapi.com/community/api/urban-dictionary)
+
+- [Datamuse API](http://www.datamuse.com/api/)
