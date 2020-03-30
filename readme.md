@@ -1,6 +1,6 @@
 # define-this
 
-Get the definition and synonyms of words on the command line. ⚡
+Get the definitions and synonyms of words from the comfort of your terminal. ⚡
 
 ## Install
 
