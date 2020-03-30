@@ -1,26 +1,36 @@
 {
-  "name": "define-this",
-  "version": "1.0.0",
-  "description": "Get the definition of words on the command line.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "bin": {
-    "define-this": "./index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Eronmmer/define-this.git"
-  },
-  "author": "Erons",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Eronmmer/define-this/issues"
-  },
-  "homepage": "https://github.com/Eronmmer/define-this#readme",
-  "dependencies": {
-    "chalk": "^3.0.0",
-    "yargs": "^15.3.1"
-  }
+	"name": "define-this",
+	"version": "1.0.0",
+	"description": "Get the definition of words on the command line.",
+	"main": "index.js",
+	"scripts": {
+		"lint": "eslint .",
+		"lint:fix": "eslint --fix --ext .js,.ts ."
+	},
+	"bin": {
+		"define-this": "./index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Eronmmer/define-this.git"
+	},
+	"author": "Erons",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Eronmmer/define-this/issues"
+	},
+	"homepage": "https://github.com/Eronmmer/define-this#readme",
+	"dependencies": {
+		"axios": "^0.19.2",
+		"chalk": "^3.0.0",
+		"yargs": "^15.3.1"
+	},
+	"devDependencies": {
+		"eslint": "^6.8.0",
+		"eslint-config-prettier": "^6.10.1",
+		"eslint-plugin-import": "^2.20.1",
+		"eslint-plugin-prettier": "^3.1.2",
+		"nodemon": "^2.0.2",
+		"prettier": "^2.0.2"
+	}
 }
