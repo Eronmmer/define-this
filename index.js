@@ -8,6 +8,8 @@ const yargs = require("yargs").scriptName("define-this");
 const define = require("./commands/define");
 const synonym = require("./commands/synonym");
 const helperText = require("./utils/helperText");
+const { init } = require("./utils/cache");
+init();
 
 if (
 	yargs.argv._.filter((elem) => {
