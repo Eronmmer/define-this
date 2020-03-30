@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+
+process.on("unhandledRejection", (err) => {
+	process.exit();
+});
+
 const yargs = require("yargs").scriptName("define-this");
 const define = require("./commands/define");
 const synonym = require("./commands/synonym");

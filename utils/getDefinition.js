@@ -20,7 +20,7 @@ const datamuseSuggestionUrl = "http://api.datamuse.com/words?sp=";
 const getDefinition = async (word) => {
 	try {
 		if (checkEmptyString(word)) {
-			return `${red("✖ Please add a word")}\n${yellow(
+			return `${red("✖ Please enter a word")}\n${yellow(
 				'Try something like "define-this define -w phenomenon"? ✔'
 			)}`;
 		} else {
@@ -53,7 +53,7 @@ const getDefinition = async (word) => {
 	} catch (err) {
 		if (!err.status) {
 			return `${red(
-				"Network error😪 please check your internet connection and try again"
+				"Oops,😪 API might be down or you don't have internet connection"
 			)}`;
 		} else if (/^5/.test(err.status)) {
 			return `${red("Oops😪 Server is down, Please try again later")}`;

@@ -14,17 +14,15 @@ const synonym = (yargs) => {
 			number: {
 				describe: "The number of synonyms to display. Defaults to one",
 				type: "number",
-				demandOption: true,
 				alias: "n",
 			},
 		},
 		handler: async (argv) => {
-			// try {
-			// 	console.log(await getSynonym(argv.word));
-			// } catch (err) {
-			// 	console.log("something went wrong");
-			// }
-			console.log(getSynonym(argv.word, argv.number));
+			try {
+				console.log(await getSynonym(argv.word, argv.number));
+			} catch (err) {
+				console.log("something went wrong");
+			}
 		},
 	});
 };
