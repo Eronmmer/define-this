@@ -42,6 +42,10 @@ define-this synonym -w phenomenon -n 3
 
 ![](https://res.cloudinary.com/djksghat4/image/upload/v1585589511/define-this/3.png)
 
+## Other features 
+
+- **Caching**: Since external APIs are used to get the definitions and synonyms of words, the result of each successful request gets cached for offline use. ⚡
+
 ## Todo
 
 - Make commands and argument follow each other in a simpler and easier to understand way
@@ -49,6 +53,10 @@ define-this synonym -w phenomenon -n 3
 - Add interactive spinner/loader-like texts while users await results
 
 - Display translation of words from one language to another
+
+## Contributing
+
+Your beautiful PRs are always welcome. 🤗
 
 ## APIS used
 
