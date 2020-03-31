@@ -5,7 +5,7 @@ const yellow = chalk.yellow;
 const green = chalk.green;
 const checkEmptyString = require("./checkEmptyString");
 const successEmojis = require("../utils/successEmojis");
-const { writeCache, readCache } = require("./cache");
+const { writeDefineCache, readDefineCache } = require("./cache");
 
 const urbanUrl =
 	"https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=";
@@ -26,7 +26,7 @@ const getDefinition = async (word) => {
 			)}`;
 		}
 
-		const cache = readCache("define", word);
+		const cache = readDefineCache(word);
 		if (cache && cache.length > 0) {
 			return `${green(
 				`DEFINITION OF ${word.toUpperCase()} ${successEmojis()}`
@@ -35,7 +35,7 @@ const getDefinition = async (word) => {
 
 		const res = await axios.get(`${urbanUrl}${word}`, config);
 		if (res.data.list.length > 0) {
-			writeCache("define", word, res.data.list[0].definition);
+			writeDefineCache(word, res.data.list[0].definition);
 
 			return `${green(
 				`DEFINITION OF ${word.toUpperCase()} ${successEmojis()}`

@@ -1,4 +1,3 @@
-const chalk = require("chalk");
 const getDefinition = require("../utils/getDefinition");
 
 const define = (yargs) => {

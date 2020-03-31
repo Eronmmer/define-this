@@ -5,7 +5,7 @@ const yellow = chalk.yellow;
 const green = chalk.green;
 const checkEmptyString = require("./checkEmptyString");
 const successEmojis = require("../utils/successEmojis");
-const { writeCache, readCache } = require("./cache");
+const { writeSynonymCache, readSynonymCache } = require("./cache");
 
 const datamuseSuggestionUrl = "http://api.datamuse.com/words?sp=";
 const datamuseSynonymUrl = "http://api.datamuse.com/words?ml=";
@@ -18,13 +18,15 @@ const getSynonym = async (word, number) => {
 			)}`;
 		}
 
-		const cache = readCache("synonym", word);
-		if (cache && cache.length > 0) {
+		const cache = readSynonymCache(word, number ? number : 1)[0];
+		if (cache) {
 			return `${green(
-				`${word.length === 1 ? "A " : `${word.length} `}SYNONYM${
-					word.length === 1 ? "" : "S"
+				`${
+					cache.responseNumber === 1 ? "A " : `${cache.responseNumber} `
+				}SYNONYM${
+					cache.responseNumber === 1 ? "" : "S"
 				} OF ${word.toUpperCase()} ${successEmojis()}`
-			)}\n${cache}`;
+			)}\n${cache.information}`;
 		}
 
 		const res = await axios.get(`${datamuseSynonymUrl}${word}`);
@@ -35,7 +37,7 @@ const getSynonym = async (word, number) => {
 					.slice(0, Math.abs(number));
 				let synonyms = "";
 				words.forEach((word) => (synonyms += `\n❯ ${word}`));
-				writeCache("synonym", word, synonyms);
+				writeSynonymCache(word, synonyms, number, words.length);
 				return `${green(
 					`${words.length === 1 ? "A " : `${words.length} `}SYNONYM${
 						words.length === 1 ? "" : "S"
@@ -43,7 +45,7 @@ const getSynonym = async (word, number) => {
 				)}\n${synonyms}`;
 			}
 			const res1 = await axios.get(`${datamuseSynonymUrl}${word}`);
-			writeCache("synonym", word, res1.data[0].word);
+			writeSynonymCache(word, `\n❯ ${res1.data[0].word}`, 1, 1);
 			return `${green(
 				`A SYNONYM OF ${word.toUpperCase()} ${successEmojis()}`
 			)}\n\n❯ ${res1.data[0].word}`;
@@ -51,7 +53,7 @@ const getSynonym = async (word, number) => {
 
 		const res2 = await axios.get(`${datamuseSuggestionUrl}${word}`);
 
-		if (res1.data.length !== 0) {
+		if (res2.data.length !== 0) {
 			let suggestions = res2.data.map((obj) => obj.word).slice(0, 3);
 			if (suggestions.length !== 1) {
 				suggestions[suggestions.length - 1] = `or ${
@@ -69,7 +71,7 @@ const getSynonym = async (word, number) => {
 		}
 	} catch (err) {
 		if (!err.status) {
-			console.log(err);
+			// console.log(err);
 			return `${red(
 				"Oops,😪 API might be down or you don't have internet connection"
 			)}`;
