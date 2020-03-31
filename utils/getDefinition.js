@@ -5,6 +5,7 @@ const yellow = chalk.yellow;
 const green = chalk.green;
 const checkEmptyString = require("./checkEmptyString");
 const successEmojis = require("../utils/successEmojis");
+const { writeDefineCache, readDefineCache } = require("./cache");
 
 const urbanUrl =
 	"https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=";
@@ -23,32 +24,40 @@ const getDefinition = async (word) => {
 			return `${red("✖ Please enter a word")}\n${yellow(
 				'Try something like "define-this define -w phenomenon"? ✔'
 			)}`;
-		} else {
-			const res = await axios.get(`${urbanUrl}${word}`, config);
-			if (res.data.list.length > 0) {
-				return `${green(
-					`DEFINITION OF ${word.toUpperCase()} ${successEmojis()}`
-				)}\n\n${res.data.list[0].definition}`;
-			} else {
-				const res = await axios.get(`${datamuseSuggestionUrl}${word}`);
+		}
 
-				if (res.data.length !== 0) {
-					let suggestions = res.data.map((obj) => obj.word).slice(0, 3);
-					if (suggestions.length !== 1) {
-						suggestions[suggestions.length - 1] = `or ${
-							suggestions[suggestions.length - 1]
-						}`;
-					}
-					const sentence = suggestions.join(", ");
-					return `${yellow(
-						`Sorry mate, I couldn't find "${word}". Did you mean ${sentence}?`
-					)}`;
-				} else {
-					return `${yellow(
-						`Oops😪 I couldn't find "${word}". Please try another word.`
-					)}`;
-				}
+		const cache = readDefineCache(word);
+		if (cache && cache.length > 0) {
+			return `${green(
+				`DEFINITION OF ${word.toUpperCase()} ${successEmojis()}`
+			)}\n\n${cache}`;
+		}
+
+		const res = await axios.get(`${urbanUrl}${word}`, config);
+		if (res.data.list.length > 0) {
+			writeDefineCache(word, res.data.list[0].definition);
+
+			return `${green(
+				`DEFINITION OF ${word.toUpperCase()} ${successEmojis()}`
+			)}\n\n${res.data.list[0].definition}`;
+		}
+		const res2 = await axios.get(`${datamuseSuggestionUrl}${word}`);
+
+		if (res2.data.length !== 0) {
+			let suggestions = res2.data.map((obj) => obj.word).slice(0, 3);
+			if (suggestions.length !== 1) {
+				suggestions[suggestions.length - 1] = `or ${
+					suggestions[suggestions.length - 1]
+				}`;
 			}
+			const sentence = suggestions.join(", ");
+			return `${yellow(
+				`Sorry mate, I couldn't find "${word}". Did you mean ${sentence}?`
+			)}`;
+		} else {
+			return `${yellow(
+				`Oops😪 I couldn't find "${word}". Please try another word.`
+			)}`;
 		}
 	} catch (err) {
 		if (!err.status) {
